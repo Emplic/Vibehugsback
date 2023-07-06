@@ -1,0 +1,30 @@
+-- Made by emplic
+-- Will kill anyone inside sword area
+-- Follow my github https://github.com/offperms for moderator warnings
+
+task.spawn(function()
+        local CoordinateFrame = CFrame.new(-8.65939236, 22.2416039, 51.2895126) -- Teleports/Gets Cords
+        local Character = game:GetService("Players").LocalPlayer.Character -- Local
+        local Humanoid = Character:FindFirstChildWhichIsA("Humanoid") -- Local
+
+        Humanoid.RootPart.CFrame = CoordinateFrame
+        local Tool = Character:FindFirstChildWhichIsA("Tool") or Character:WaitForChild("Sword") -- Finds your sword/s
+        local Handle = Tool:WaitForChild("Handle")
+
+
+        while true do
+            if Tool:IsDescendantOf(Character) then
+                for _, Player in pairs(game:GetService("Players"):GetPlayers()) do
+                    if Player ~= game:GetService("Players").LocalPlayer then
+                        pcall(function()
+                            Player.Character:FindFirstChildWhichIsA("Humanoid").RootPart.CFrame = Handle.CFrame * CFrame.new(math.random() / 8, math.random() / 8, math.random() / 8)
+                        end)
+                    end
+                end
+                Tool:Activate()
+            end
+            task.wait(0)
+        end
+    end)
+    
+-- https://github.com/offperms
